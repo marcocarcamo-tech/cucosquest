@@ -16,4 +16,5 @@ public class InstantiatePrefab : MonoBehaviour
         player.transform.position = startingPoint.transform.position;
     }
     
+
 }

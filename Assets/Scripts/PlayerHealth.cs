@@ -82,13 +82,13 @@ public class PlayerHealth : MonoBehaviour
         health = totalHealth;
         healthUI.sizeDelta = new Vector2(heartSize * health, heartSize);
         renderer.color = Color.white;
-
+        gameOverMenu.gameObject.SetActive(false);
     }
 
     private void OnDisable()
     {
          
-        
+        //
         gameOverMenu.gameObject.SetActive(true);
 
         hordes.gameObject.SetActive(false);
