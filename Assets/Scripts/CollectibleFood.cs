@@ -9,6 +9,7 @@ public class CollectibleFood : MonoBehaviour
 	[SerializeField]int addItem = 1;
 	private Collider2D _collider;
 	private SpriteRenderer _sprite;
+
 	
 
     // Start is called before the first frame update

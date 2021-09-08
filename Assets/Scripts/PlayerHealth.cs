@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
     public int totalHealth = 5;
     public RectTransform healthUI;
-
+    public RectTransform startMenu;
     public RectTransform gameOverMenu;
     public GameObject hordes;
+    public TextMeshProUGUI _textMesh;
 
     
     
@@ -26,6 +28,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Awake()
     {
+
         renderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         controller = GetComponent<PlayerController>();
@@ -83,6 +86,15 @@ public class PlayerHealth : MonoBehaviour
         healthUI.sizeDelta = new Vector2(heartSize * health, heartSize);
         renderer.color = Color.white;
         gameOverMenu.gameObject.SetActive(false);
+
+        if (startMenu.gameObject.activeSelf == true)
+        {
+            _textMesh.gameObject.SetActive(false);
+        } else
+        {
+            _textMesh.gameObject.SetActive(true);
+        }
+        
     }
 
     private void OnDisable()
@@ -96,7 +108,7 @@ public class PlayerHealth : MonoBehaviour
         animator.enabled = false;
         controller.enabled = false;
         playerAttack.enabled = false;
-
+        _textMesh.gameObject.SetActive(false);
     }
 
     
