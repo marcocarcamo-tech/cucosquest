@@ -7,11 +7,12 @@ public class FoodCounter : MonoBehaviour
 {
     public TextMeshProUGUI _count;
     [SerializeField] int foodCounter = 0;
+     
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        CounterItems(foodCounter);
     }
 
     // Update is called once per frame
@@ -24,6 +25,6 @@ public class FoodCounter : MonoBehaviour
     {
         //Print count in canvas
         foodCounter += counter;
-        _count.text = "Food: " + foodCounter.ToString();
+        _count.text = "Food: " + foodCounter.ToString() + "/25";
     }
 }
