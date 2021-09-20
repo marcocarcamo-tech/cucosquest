@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 3751909857459566396}
   - component: {fileID: 3751909857459566399}
   - component: {fileID: 3751909857459566397}
+  - component: {fileID: 620282276047709121}
+  - component: {fileID: 158833665}
   m_Layer: 10
-  m_Name: snack
+  m_Name: snack-water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,9 +28,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3751909857459566393}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.57, y: -1.509, z: 1390.0894}
-  m_LocalScale: {x: 0.24871, y: 0.24871, z: 0.24871}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -73,12 +75,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
-  m_Color: {r: 0.9622642, g: 0.70420164, b: 0.0671769, a: 1}
+  m_Sprite: {fileID: -1915114550190390614, guid: 4141bd911e7a00e44b4670d052ea77cf, type: 3}
+  m_Color: {r: 0.69411767, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.16, y: 0.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -97,18 +99,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0041682273, y: -0.0009198077}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 0.16, y: 0.16}
+    newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.07474163, y: 0.14158675}
   m_EdgeRadius: 0
 --- !u!114 &3751909857459566397
 MonoBehaviour:
@@ -122,5 +124,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa330807a2cd2ac43bc08fe3b622a866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodCounter: 0
-  _count: {fileID: 0}
+  addItem: 1
+--- !u!95 &620282276047709121
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3751909857459566393}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f1f27aa80b8b26044b668dd7ffed29b6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!111 &158833665
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3751909857459566393}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
