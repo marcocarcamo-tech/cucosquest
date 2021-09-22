@@ -25,11 +25,12 @@ public class PlayerController : MonoBehaviour
     // Movement
 
     private Vector2 movement;
-                       
+    private bool moveLeft, moveRight;
+
     private bool facingRight = true;
     private bool isGrounded;
-    public Vector2 rightMovement;
-    public Vector2 leftMovement;
+    private float horizontalPosition;
+
 
     // Attack
     private bool isAttacking;
@@ -53,11 +54,31 @@ public class PlayerController : MonoBehaviour
 
         //Movement
 
-        
-        rightMovement = new Vector2(1f, 0f);
-        leftMovement = new Vector2(-1, 0f);
+        if (moveLeft)
+        {
+            horizontalPosition = -1;
+        }
+        else if (moveRight)
+        {
+            horizontalPosition = 1;
 
+        }
+        else if (!moveLeft && !moveRight)
+        {
+            horizontalPosition = 0;
+        }
 
+        movement = new Vector2(horizontalPosition, 0f);
+
+        //Flip
+
+        if(facingRight == true && moveLeft)
+        {
+            Flip();
+        } else if(facingRight == false && moveRight)
+        {
+            Flip();
+        }
 
         // Is Grounded?
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
@@ -68,12 +89,12 @@ public class PlayerController : MonoBehaviour
         }
 
         //Wanna attack?
-        if(Input.GetButtonDown("Fire1") && isGrounded == true) {
-            movement = Vector2.zero;
-            rigidbody.velocity = Vector2.zero;
-            animator.SetTrigger("Attack");
+        //if(Input.GetButtonDown("Fire1") && isGrounded == true) {
+        //    movement = Vector2.zero;
+        //    rigidbody.velocity = Vector2.zero;
+        //    animator.SetTrigger("Attack");
          
-        }
+        //}
 
         //Second attack?
 
@@ -83,8 +104,8 @@ public class PlayerController : MonoBehaviour
     {
         if(isAttacking == false)
         {
-            //float horizontalVelocity = movement.normalized.x * speed;
-            //rigidbody.velocity = new Vector2(horizontalVelocity, rigidbody.velocity.y);
+            float horizontalVelocity = movement.normalized.x * speed;
+            rigidbody.velocity = new Vector2(horizontalVelocity, rigidbody.velocity.y);
         }
         
     }
@@ -137,16 +158,25 @@ public class PlayerController : MonoBehaviour
 
     public void Left()
     {
-        float horizontalVelocity = rightMovement.normalized.x * speed;
-        rigidbody.velocity = new Vector2(horizontalVelocity, rigidbody.velocity.y);
+        moveLeft = true;
+
+    }
+
+    public void StopLeft()
+    {
+        moveLeft = false;
     }
 
     public void Right()
     {
-        float horizontalVelocity = rightMovement.normalized.x * speed;
-        rigidbody.velocity = new Vector2(horizontalVelocity, rigidbody.velocity.y);
+        moveRight = true;
+
     }
 
+    public void StopRight()
+    {
+        moveRight = false;
+    }
 
     /*private void Instantiate()
     {
