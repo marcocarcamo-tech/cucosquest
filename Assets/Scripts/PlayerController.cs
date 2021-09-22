@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController : MonoBehaviour
 {
     public float longIdleTime = 15f;
@@ -24,8 +25,11 @@ public class PlayerController : MonoBehaviour
     // Movement
 
     private Vector2 movement;
+                       
     private bool facingRight = true;
     private bool isGrounded;
+    public Vector2 rightMovement;
+    public Vector2 leftMovement;
 
     // Attack
     private bool isAttacking;
@@ -45,24 +49,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isAttacking == false)
-        {
-            //Movement
-            float horizontalInput = Input.GetAxisRaw("Horizontal");
-            movement = new Vector2(horizontalInput, 0f);
 
-            //Flip character
-            if (horizontalInput < 0f && facingRight == true)
-            {
-                Flip();
-            }
-            else if (horizontalInput > 0f && facingRight == false)
-            {
-                Flip();
 
-            }
-        }
+        //Movement
+
         
+        rightMovement = new Vector2(1f, 0f);
+        leftMovement = new Vector2(-1, 0f);
+
+
+
         // Is Grounded?
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
@@ -87,8 +83,8 @@ public class PlayerController : MonoBehaviour
     {
         if(isAttacking == false)
         {
-            float horizontalVelocity = movement.normalized.x * speed;
-            rigidbody.velocity = new Vector2(horizontalVelocity, rigidbody.velocity.y);
+            //float horizontalVelocity = movement.normalized.x * speed;
+            //rigidbody.velocity = new Vector2(horizontalVelocity, rigidbody.velocity.y);
         }
         
     }
@@ -138,6 +134,19 @@ public class PlayerController : MonoBehaviour
         localScaleX = localScaleX * -1f;
         transform.localScale = new Vector3(localScaleX, transform.localScale.y, transform.localScale.z);
     }
+
+    public void Left()
+    {
+        float horizontalVelocity = rightMovement.normalized.x * speed;
+        rigidbody.velocity = new Vector2(horizontalVelocity, rigidbody.velocity.y);
+    }
+
+    public void Right()
+    {
+        float horizontalVelocity = rightMovement.normalized.x * speed;
+        rigidbody.velocity = new Vector2(horizontalVelocity, rigidbody.velocity.y);
+    }
+
 
     /*private void Instantiate()
     {
