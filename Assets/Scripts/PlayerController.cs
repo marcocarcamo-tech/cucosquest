@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class PlayerController : MonoBehaviour
@@ -9,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 2.5f;
     public float jumpForce = 2.5f;
     public float attackTime = 0.5f;
+    public float attackReactivateDelay = 0.2f;
 
     public Transform groundCheck;
     public LayerMask groundLayer;
@@ -30,11 +32,14 @@ public class PlayerController : MonoBehaviour
     private bool facingRight = true;
     private bool isGrounded;
     private float horizontalPosition;
-
+    private bool isJumping;
 
     // Attack
     private bool isAttacking;
     private bool isSecondAttacking;
+
+    //UI Buttons
+    public Button attackButton;
 
     private void Awake()
     {
@@ -84,17 +89,22 @@ public class PlayerController : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
         // Is Jumping'
-        if (Input.GetButtonDown("Jump") && isGrounded == true && isAttacking == false) {
+        if (isJumping == true && isGrounded == true && isAttacking == false) {
             rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            isJumping = false;
         }
 
         //Wanna attack?
-        //if(Input.GetButtonDown("Fire1") && isGrounded == true) {
-        //    movement = Vector2.zero;
-        //    rigidbody.velocity = Vector2.zero;
-        //    animator.SetTrigger("Attack");
+        if(isAttacking == true && isGrounded == true) {
+            movement = Vector2.zero;
+            rigidbody.velocity = Vector2.zero;
+            animator.SetTrigger("Attack");
+            isAttacking = false;
          
-        //}
+        } else if (isAttacking == false )
+        {
+
+        }
 
         //Second attack?
 
@@ -118,20 +128,20 @@ public class PlayerController : MonoBehaviour
         attackTime += Time.deltaTime;
 
         //Animator
-        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack")) {
-            isAttacking = true;
-        } else {
-            isAttacking = false;
-        }
+        //if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack")) {
+        //    isAttacking = true;
+        //} else {
+        //    isAttacking = false;
+        //}
 
-        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack2") && attackTime >= 0.5f)
-        {
-            isSecondAttacking = true;
-        }
-        else
-        {
-            isSecondAttacking = false;
-        }
+        //if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack2") && attackTime >= 0.5f)
+        //{
+        //    isSecondAttacking = true;
+        //}
+        //else
+        //{
+        //    isSecondAttacking = false;
+        //}
 
         
 
@@ -147,6 +157,11 @@ public class PlayerController : MonoBehaviour
             longIdleTimer = 0f;
         }
     }
+
+    //IEnumerator WaitForNextAttack(Button button, float seconds)
+    //{
+    //    yield return new WaitForSeconds(seconds);
+    
 
     private void Flip()
     {
@@ -177,6 +192,20 @@ public class PlayerController : MonoBehaviour
     {
         moveRight = false;
     }
+
+    public void Attack()
+    {
+        isAttacking = true;
+        
+        
+
+    }
+
+    public void Jump()
+    {
+        isJumping = true;
+    }
+   
 
     /*private void Instantiate()
     {
